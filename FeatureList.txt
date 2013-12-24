@@ -1,0 +1,12 @@
+EasyNote Features (v1):
+1. Handwriting (pressure sensitivity?)
+2. Grid paper
+3. Lined paper
+4. Background image
+5. Color picker
+6. Printable notes
+7. Pinch zoom
+POSSIBLY
+Cloud note storage?
+Calculator?  
+Type-written notes?
