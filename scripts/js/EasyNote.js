@@ -3,16 +3,21 @@
   var EasyNote;
 
   EasyNote = (function() {
-    EasyNote.prototype.WIDTH = 800;
+    EasyNote.prototype.WIDTH = (window.innerWidth / 100) * 80;
 
-    EasyNote.prototype.HEIGHT = 800;
+    EasyNote.prototype.HEIGHT = null;
 
     EasyNote.prototype.LINE_SPACE = 20;
 
+    EasyNote.prototype.background = null;
+
+    EasyNote.prototype.canvas = null;
+
     function EasyNote() {
+      this.HEIGHT = Math.floor(this.WIDTH * 1.29411764706);
       this.setupStage();
-      console.log('set up stage');
       this.setupBackground();
+      this.setupCanvas();
     }
 
     EasyNote.prototype.setupStage = function() {
@@ -27,6 +32,58 @@
       this.background = new Kinetic.Layer();
       this.grid();
       return this.stage.add(this.background);
+    };
+
+    EasyNote.prototype.setupCanvas = function() {
+      var cnv,
+        _this = this;
+      this.canvas = new Kinetic.Layer();
+      window.canvas = this.canvas;
+      this.stage.add(this.canvas);
+      this.canvas.drawing = false;
+      this.canvas.beginLine = function(x, y) {
+        this.drawing = true;
+        this.startX = x;
+        return this.startY = y;
+      };
+      this.canvas.drawLine = function(x, y) {
+        var line;
+        if (!this.drawing) {
+          return;
+        }
+        line = new Kinetic.Line({
+          points: [this.startX, this.startY, x, y],
+          stroke: 'black',
+          strokeWidth: 10,
+          lineCap: 'round',
+          lineJoin: 'round'
+        });
+        this.add(line);
+        this.startX = x;
+        this.startY = y;
+        return this.getParent().drawScene();
+      };
+      this.canvas.endLine = function() {
+        this.drawing = false;
+        return this.getParent().draw();
+      };
+      cnv = this.canvas.getCanvas()._canvas;
+      $(cnv).on('mousedown', function(event) {
+        var offset;
+        console.log('down');
+        offset = $(event.currentTarget).offset();
+        return _this.canvas.beginLine(event.clientX - offset.left, event.clientY - offset.top);
+      });
+      $(cnv).on('mousemove', function(event) {
+        var offset;
+        console.log('move');
+        offset = $(event.currentTarget).offset();
+        return _this.canvas.drawLine(event.clientX - offset.left, event.clientY - offset.top);
+      });
+      return $(cnv).on('mouseup', function() {
+        console.log('up');
+        return _this.canvas.endLine();
+      });
     };
 
     EasyNote.prototype.makeRule = function(coord, horizontal) {

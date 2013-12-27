@@ -1,1 +1,1 @@
-coffee --output js --compile coffee
+coffee --output "C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\projects\PERSONAL\EasyNote\scripts\js" --compile "C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\projects\PERSONAL\EasyNote\scripts\coffee"
