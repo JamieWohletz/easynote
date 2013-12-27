@@ -35,16 +35,39 @@
     };
 
     EasyNote.prototype.setupCanvas = function() {
-      var cnv,
+      var cnv, offsetX, offsetY,
         _this = this;
       this.canvas = new Kinetic.Layer();
       window.canvas = this.canvas;
       this.stage.add(this.canvas);
+      this.extendCanvas();
+      cnv = this.canvas.getCanvas()._canvas;
+      offsetX = cnv.getBoundingClientRect().left;
+      offsetY = cnv.getBoundingClientRect().top;
+      $(cnv).on('mousedown', function(event) {
+        console.log('down');
+        return _this.canvas.beginLine(event.pageX - offsetX, event.pageY - offsetY);
+      });
+      $(cnv).on('mousemove', function(event) {
+        var offset;
+        console.log('move');
+        offset = $(event.currentTarget).offset();
+        return _this.canvas.drawLine(event.pageX - offsetX, event.pageY - offsetY);
+      });
+      return $(cnv).on('mouseup', function() {
+        console.log('up');
+        return _this.canvas.endLine();
+      });
+    };
+
+    EasyNote.prototype.extendCanvas = function() {
       this.canvas.drawing = false;
       this.canvas.context = this.canvas.getCanvas()._canvas.getContext('2d');
       this.canvas.beginLine = function(x, y) {
         this.drawing = true;
         this.context.beginPath();
+        this.context.lineCap = 'round';
+        this.context.lineJoin = 'round';
         this.context.strokeStyle = 'black';
         this.context.lineWidth = '5';
         return this.context.moveTo(x, y);
@@ -56,26 +79,9 @@
         this.context.lineTo(x, y);
         return this.context.stroke();
       };
-      this.canvas.endLine = function() {
+      return this.canvas.endLine = function() {
         return this.drawing = false;
       };
-      cnv = this.canvas.getCanvas()._canvas;
-      $(cnv).on('mousedown', function(event) {
-        var offset;
-        console.log('down');
-        offset = $(event.currentTarget).offset();
-        return _this.canvas.beginLine(event.clientX - offset.left, event.clientY - offset.top);
-      });
-      $(cnv).on('mousemove', function(event) {
-        var offset;
-        console.log('move');
-        offset = $(event.currentTarget).offset();
-        return _this.canvas.drawLine(event.clientX - offset.left, event.clientY - offset.top);
-      });
-      return $(cnv).on('mouseup', function() {
-        console.log('up');
-        return _this.canvas.endLine();
-      });
     };
 
     EasyNote.prototype.makeRule = function(coord, horizontal) {

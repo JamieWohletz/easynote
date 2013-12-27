@@ -34,12 +34,33 @@ class EasyNote
       @stage.add(@canvas)
       #Unfortunately, we have to work outside of KineticJS to get drawing functionality.
       #Extend the canvas object's API
+      @extendCanvas()
+      
+      #Add mouse listeners to the actual canvas object
+      #Note that we need to subtract the offset produced by the fact
+      #that the canvas isn't flush with the screen corners
+      cnv = @canvas.getCanvas()._canvas
+      offsetX = cnv.getBoundingClientRect().left
+      offsetY = cnv.getBoundingClientRect().top
+      $(cnv).on 'mousedown', (event) =>
+         #offset = $(event.currentTarget).offset()
+         @canvas.beginLine event.pageX - offsetX, event.pageY - offsetY
+      $(cnv).on 'mousemove', (event) =>
+         offset = $(event.currentTarget).offset()
+         @canvas.drawLine event.pageX - offsetX, event.pageY - offsetY
+      $(cnv).on 'mouseup', =>
+         @canvas.endLine()
+         
+   #Adds additional functionality to the @canvas object so that the user can draw and erase.
+   extendCanvas: ->
       @canvas.drawing = false
       @canvas.context = @canvas.getCanvas()._canvas.getContext '2d'
       @canvas.beginLine = (x,y) ->
          @drawing = true
+         #default values below; can and will be updated on the fly
          @context.beginPath()
          @context.lineCap='round'
+         @context.lineJoin='round'
          @context.strokeStyle = 'black'
          @context.lineWidth = '5'
          @context.moveTo(x,y)
@@ -52,21 +73,6 @@ class EasyNote
          
       @canvas.endLine = ->
          @drawing = false
-      
-      #Add mouse listeners to the actual canvas object
-      cnv = @canvas.getCanvas()._canvas
-      $(cnv).on 'mousedown', (event) =>
-         console.log 'down'
-         offset = $(event.currentTarget).offset()
-         @canvas.beginLine event.clientX - offset.left, event.clientY - offset.top
-      $(cnv).on 'mousemove', (event) =>
-         console.log 'move'
-         offset = $(event.currentTarget).offset()
-         @canvas.drawLine event.clientX - offset.left, event.clientY - offset.top
-      $(cnv).on 'mouseup', =>
-         console.log 'up'
-         @canvas.endLine()
-         
 
    makeRule: (coord, horizontal) ->
       points
