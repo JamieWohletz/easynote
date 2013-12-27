@@ -1,4 +1,17 @@
 #title
 {
    /*text-align:center;*/
+   float:top;
+}
+#control-panel
+{
+   float:left;
+}
+#control-panel button
+{
+   width:100%;
+}
+#easynote
+{
+   float:center;
 }

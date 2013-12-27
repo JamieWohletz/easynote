@@ -50,19 +50,23 @@ class EasyNote
          @canvas.drawLine event.pageX - offsetX, event.pageY - offsetY
       $(cnv).on 'mouseup', =>
          @canvas.endLine()
+      $(cnv).click =>
+         @canvas.drawPoint event.pageX - offsetX, event.pageY - offsetY
          
    #Adds additional functionality to the @canvas object so that the user can draw and erase.
    extendCanvas: ->
       @canvas.drawing = false
       @canvas.context = @canvas.getCanvas()._canvas.getContext '2d'
+      #set default drawing values
+      @canvas.context.lineCap='round'
+      @canvas.context.lineJoin='round'
+      @canvas.context.strokeStyle = 'black'
+      @canvas.context.lineWidth = '5'         
+      #add in custom functions
       @canvas.beginLine = (x,y) ->
          @drawing = true
          #default values below; can and will be updated on the fly
          @context.beginPath()
-         @context.lineCap='round'
-         @context.lineJoin='round'
-         @context.strokeStyle = 'black'
-         @context.lineWidth = '5'
          @context.moveTo(x,y)
       
       @canvas.drawLine = (x,y) ->
@@ -73,6 +77,10 @@ class EasyNote
          
       @canvas.endLine = ->
          @drawing = false
+        
+      #only used on mouseclick  
+      @canvas.drawPoint = (x,y) ->
+         @context.fillRect(x,y,5,5)
 
    makeRule: (coord, horizontal) ->
       points

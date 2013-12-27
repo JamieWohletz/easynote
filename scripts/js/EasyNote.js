@@ -45,31 +45,31 @@
       offsetX = cnv.getBoundingClientRect().left;
       offsetY = cnv.getBoundingClientRect().top;
       $(cnv).on('mousedown', function(event) {
-        console.log('down');
         return _this.canvas.beginLine(event.pageX - offsetX, event.pageY - offsetY);
       });
       $(cnv).on('mousemove', function(event) {
         var offset;
-        console.log('move');
         offset = $(event.currentTarget).offset();
         return _this.canvas.drawLine(event.pageX - offsetX, event.pageY - offsetY);
       });
-      return $(cnv).on('mouseup', function() {
-        console.log('up');
+      $(cnv).on('mouseup', function() {
         return _this.canvas.endLine();
+      });
+      return $(cnv).click(function() {
+        return _this.canvas.drawPoint(event.pageX - offsetX, event.pageY - offsetY);
       });
     };
 
     EasyNote.prototype.extendCanvas = function() {
       this.canvas.drawing = false;
       this.canvas.context = this.canvas.getCanvas()._canvas.getContext('2d');
+      this.canvas.context.lineCap = 'round';
+      this.canvas.context.lineJoin = 'round';
+      this.canvas.context.strokeStyle = 'black';
+      this.canvas.context.lineWidth = '5';
       this.canvas.beginLine = function(x, y) {
         this.drawing = true;
         this.context.beginPath();
-        this.context.lineCap = 'round';
-        this.context.lineJoin = 'round';
-        this.context.strokeStyle = 'black';
-        this.context.lineWidth = '5';
         return this.context.moveTo(x, y);
       };
       this.canvas.drawLine = function(x, y) {
@@ -79,8 +79,11 @@
         this.context.lineTo(x, y);
         return this.context.stroke();
       };
-      return this.canvas.endLine = function() {
+      this.canvas.endLine = function() {
         return this.drawing = false;
+      };
+      return this.canvas.drawPoint = function(x, y) {
+        return this.context.fillRect(x, y, 5, 5);
       };
     };
 
