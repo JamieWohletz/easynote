@@ -35,28 +35,23 @@ class EasyNote
       #Unfortunately, we have to work outside of KineticJS to get drawing functionality.
       #Extend the canvas object's API
       @canvas.drawing = false
+      @canvas.context = @canvas.getCanvas()._canvas.getContext '2d'
       @canvas.beginLine = (x,y) ->
          @drawing = true
-         @startX = x
-         @startY = y
+         @context.beginPath()
+         @context.lineCap='round'
+         @context.strokeStyle = 'black'
+         @context.lineWidth = '5'
+         @context.moveTo(x,y)
       
       @canvas.drawLine = (x,y) ->
          if !@drawing
             return
-         line = new Kinetic.Line
-            points: [@startX, @startY, x, y]
-            stroke: 'black'
-            strokeWidth: 10
-            lineCap: 'round'
-            lineJoin: 'round'
-         @add(line)
-         @startX = x
-         @startY = y
-         @getParent().drawScene()
+         @context.lineTo(x,y)
+         @context.stroke()
          
       @canvas.endLine = ->
          @drawing = false
-         @getParent().draw()
       
       #Add mouse listeners to the actual canvas object
       cnv = @canvas.getCanvas()._canvas

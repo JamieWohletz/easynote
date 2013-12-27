@@ -41,31 +41,23 @@
       window.canvas = this.canvas;
       this.stage.add(this.canvas);
       this.canvas.drawing = false;
+      this.canvas.context = this.canvas.getCanvas()._canvas.getContext('2d');
       this.canvas.beginLine = function(x, y) {
         this.drawing = true;
-        this.startX = x;
-        return this.startY = y;
+        this.context.beginPath();
+        this.context.strokeStyle = 'black';
+        this.context.lineWidth = '5';
+        return this.context.moveTo(x, y);
       };
       this.canvas.drawLine = function(x, y) {
-        var line;
         if (!this.drawing) {
           return;
         }
-        line = new Kinetic.Line({
-          points: [this.startX, this.startY, x, y],
-          stroke: 'black',
-          strokeWidth: 10,
-          lineCap: 'round',
-          lineJoin: 'round'
-        });
-        this.add(line);
-        this.startX = x;
-        this.startY = y;
-        return this.getParent().drawScene();
+        this.context.lineTo(x, y);
+        return this.context.stroke();
       };
       this.canvas.endLine = function() {
-        this.drawing = false;
-        return this.getParent().draw();
+        return this.drawing = false;
       };
       cnv = this.canvas.getCanvas()._canvas;
       $(cnv).on('mousedown', function(event) {
