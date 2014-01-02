@@ -1,5 +1,6 @@
 class window.EasyNote
-   WIDTH: (window.innerWidth / 100) * 90
+   #The width is either 50% the window width OR 900 pixels. It will never go below 900 pixels.
+   WIDTH: Math.max (window.innerWidth / 100) * 50, 900
    #The height is set in the constructor and is proportional 
    #to the window width; this ratio comes from 
    #standard letter paper dimensions (8.5 x 11). 
@@ -55,6 +56,20 @@ class window.EasyNote
       
    clearAll: ->
       @canvas.clear()
+      
+   #Prints ONLY the canvas layer -- the background will be ignored.   
+   printCanvas: ->
+      cnv = @canvas.getCanvas()._canvas
+      #Unfortunately, we need to use a popup. On the plus side, the user never sees it. 
+      w = window.open()
+      w.document.write '<img src="' + cnv.toDataURL("image/png") + '" width="'+@WIDTH+'" height="'+@HEIGHT+'"/>'
+      w.print()
+      w.close()
+      
+   #Prints both the background and the canvas.
+   printAll: ->
+      #This relies on special print-only CSS. See main.css.
+      window.print();
          
    constructor: ->
       @HEIGHT = Math.floor(@WIDTH * 1.29411764706)

@@ -42,8 +42,14 @@
     $('#paper-lined').click(function() {
       return easyNote.linedPaper();
     });
-    return $('#paper-regular').click(function() {
+    $('#paper-regular').click(function() {
       return easyNote.regularPaper();
+    });
+    $('#print-canvas').click(function() {
+      return easyNote.printCanvas();
+    });
+    return $('#print-all').click(function() {
+      return easyNote.printAll();
     });
   });
 

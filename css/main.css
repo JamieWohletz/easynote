@@ -5,7 +5,7 @@
 }
 #control-panel
 {
-   float:left;
+   border: inset 2px;
 }
 #control-panel button
 {
@@ -13,7 +13,17 @@
 }
 #easynote
 {
-   float:center;
+   border:solid 2px;
+   overflow:hidden;
+}
+/*Add special rules for printing.
+When print is called, the control panel is hidden
+so the only thing visible to the browser is the easynote div.*/
+@media print {
+   #control-panel
+     {
+      display:none;
+   }
 }
 table
 {

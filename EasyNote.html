@@ -8,74 +8,74 @@
       <div id="header">
          <h3 id="title">EasyNote</h3>
       </div>
-      <div id="control-panel">
-         <table>
-         <tr><td><button id="clear-canvas">Clear</button></td></tr>
-         <tr><th>Drawing</th></tr>
-         <tr>
-            <td><button id="pen-button">Pen</button></td>
-         </tr>
-         <tr>
-            <td><button id="eraser-button">Eraser</button><br></td>
-         </tr>
-         <tr>
-            <th>Size</th>
-         </tr>
-         <tr>
-            <td>
-               <table id='size-table'>
-                  <tr>
-                     <td><button id="size-tiny"><img src="images/sizeicon.svg"></button></td>
-                  </tr>
-                  <tr>
-                     <td><button id="size-small"><img src="images/sizeicon.svg"></button></td>
-                  </tr>
-                  <tr>
-                     <td><button id="size-medium"><img src="images/sizeicon.svg"></button></td>
-                  </tr>
-                  <tr>
-                     <td><button id="size-large"><img src="images/sizeicon.svg"></button></td>
-                  </tr>
-               </table>
-            </td>
-         </tr>
-         <tr>
-            <th>Color</th>
-         </tr>
-         <tr>
-            <td>
+      <!--this table allows for a 2-column layout-->
+      <table>
+         <td valign="top">
+            <div id="control-panel">
                <table>
-                  <tr>
-                     <td><button id="color-black"> </button></td>
-                     <td><button id="color-red"> </button></td>
-                     <td><button id="color-green"> </button></td>
-                     <td><button id="color-blue"> </button></td>
-                  </tr>
+               <tr><th>Drawing</th></tr>
+               <tr>
+                  <td><button id="pen-button">Pen</button></td>
+               </tr>
+               <tr>
+                  <td><button id="eraser-button">Eraser</button><br></td>
+               </tr>
+               <tr><td><button id="clear-canvas">Erase All</button></td></tr>
+               <tr>
+                  <th>Size</th>
+               </tr>
+               <tr>
+                  <td><button id="size-tiny"><img src="images/sizeicon.svg"></button></td>
+               </tr>
+               <tr>
+                  <td><button id="size-small"><img src="images/sizeicon.svg"></button></td>
+               </tr>
+               <tr>
+                  <td><button id="size-medium"><img src="images/sizeicon.svg"></button></td>
+               </tr>
+               <tr>
+                  <td><button id="size-large"><img src="images/sizeicon.svg"></button></td>
+               </tr>
+               <tr>
+                  <th>Color</th>
+               </tr>
+               <tr>
+                  <td>
+                     <table>
+                        <tr>
+                           <td><button id="color-black"> </button></td>
+                           <td><button id="color-red"> </button></td>
+                           <td><button id="color-green"> </button></td>
+                           <td><button id="color-blue"> </button></td>
+                        </tr>
+                     </table>
+                  </td>
+               </tr>
+               <tr>
+                  <th>Background</th>
+               </tr>
+               <tr>
+                  <td><button id="paper-regular">White</button></td>
+               </tr>
+               <tr>
+                  <td><button id="paper-graph">Graph</button></td>
+               </tr>
+               <tr>
+                  <td><button id="paper-lined">Lined</button></td>
+               </tr>
+               <tr>
+                  <th>Printing</th>
+               </tr>
+               <tr><td><button id="print-canvas">Print Canvas</button></td></tr>
+               <tr><td><button id="print-all">Print All</button></td></tr>
                </table>
-            </td>
-         </tr>
-         <tr>
-            <th>Background</th>
-         </tr>
-         <tr>
-            <td>
-               <table>
-                  <tr>
-                     <td><button id="paper-regular">White</button></td>
-                  </tr>
-                  <tr>
-                     <td><button id="paper-graph">Graph</button></td>
-                  </tr>
-                  <tr>
-                     <td><button id="paper-lined">Lined</button></td>
-                  </tr>
-               </table>
-            </td>
-         </tr>
-         </table>
-      </div>
-      <div id="easynote">
-      </div>
+            </div>
+         </td>
+         <td>
+            <div id="easynote">
+            </div>
+         </td>
+      </table>
       <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
       <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
       <script src="scripts/js/EasyNote.js"></script>

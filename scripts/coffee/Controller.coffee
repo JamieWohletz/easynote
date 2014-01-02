@@ -30,3 +30,7 @@ $(document).ready ->
       easyNote.linedPaper()
    $('#paper-regular').click ->
       easyNote.regularPaper()
+   $('#print-canvas').click ->
+      easyNote.printCanvas()
+   $('#print-all').click ->
+      easyNote.printAll()
