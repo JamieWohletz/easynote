@@ -3,12 +3,17 @@
 $(document).ready ->
    easyNote = new window.EasyNote()
    $('#clear-canvas').click ->
-      confirmed = confirm 'Erase all drawings?'
+      console.log 'derp'
+      confirmed = window.confirm 'Erase all drawings?'
       if confirmed
          easyNote.clearAll()
    $('#pen-button').click ->
+      $('#pen-button').addClass 'selected'
+      $('#eraser-button').removeClass 'selected'
       easyNote.activatePen()
    $('#eraser-button').click ->
+      $('#eraser-button').addClass 'selected'
+      $('#pen-button').removeClass 'selected'
       easyNote.activateEraser()
    $('#size-tiny').click ->
       easyNote.setPenSize easyNote.PEN_SIZE_TINY

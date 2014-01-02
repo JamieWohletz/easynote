@@ -96,7 +96,7 @@ class window.EasyNote
       
    #Prints ONLY the canvas layer -- the background will be ignored.   
    printCanvas: ->
-      w = showCanvas()
+      w = @showCanvas()
       #We need to close the document and focus on the window before printing for cross-browser functionality. 
       #See this SO question: http://stackoverflow.com/questions/2555697/window-print-not-working-in-ie
       w.document.close()

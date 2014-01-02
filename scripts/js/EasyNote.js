@@ -106,7 +106,7 @@
 
     EasyNote.prototype.printCanvas = function() {
       var w;
-      w = showCanvas();
+      w = this.showCanvas();
       w.document.close();
       w.focus();
       w.print();

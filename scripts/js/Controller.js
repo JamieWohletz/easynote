@@ -7,15 +7,20 @@
     easyNote = new window.EasyNote();
     $('#clear-canvas').click(function() {
       var confirmed;
-      confirmed = confirm('Erase all drawings?');
+      console.log('derp');
+      confirmed = window.confirm('Erase all drawings?');
       if (confirmed) {
         return easyNote.clearAll();
       }
     });
     $('#pen-button').click(function() {
+      $('#pen-button').addClass('selected');
+      $('#eraser-button').removeClass('selected');
       return easyNote.activatePen();
     });
     $('#eraser-button').click(function() {
+      $('#eraser-button').addClass('selected');
+      $('#pen-button').removeClass('selected');
       return easyNote.activateEraser();
     });
     $('#size-tiny').click(function() {
