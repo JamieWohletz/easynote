@@ -2,10 +2,10 @@ EasyNote Features (v1):
 1. Handwriting (pressure sensitivity?)
 2. Grid paper
 3. Lined paper 
-4. Background image
+* 4. Background image * VERSION 2
 5. Color picker
 6. Printable notes
-7. Pinch zoom
+* 7. Pinch zoom * VERSION 2
 POSSIBLY
 Cloud note storage?
 Calculator?  

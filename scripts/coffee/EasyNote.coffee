@@ -39,6 +39,23 @@ class window.EasyNote
       else
          @canvas.penColor = color
          
+   regularPaper: ->
+      @background.removeChildren()
+      @background.draw()
+        
+   graphPaper: ->
+      @background.removeChildren()
+      @grid()
+      @background.draw()
+      
+   linedPaper: ->
+      @background.removeChildren()
+      @makeRules('horizontal')
+      @background.draw()
+      
+   clearAll: ->
+      @canvas.clear()
+         
    constructor: ->
       @HEIGHT = Math.floor(@WIDTH * 1.29411764706)
       @setupStage()
@@ -130,7 +147,6 @@ class window.EasyNote
             strokeWidth: 1
       
    grid: ->
-      @background.clear()
       @makeRules('both')
       
    makeRules: (kind) ->

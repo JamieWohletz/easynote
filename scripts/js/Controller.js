@@ -3,6 +3,9 @@
   $(document).ready(function() {
     var easyNote;
     easyNote = new window.EasyNote();
+    $('#clear-canvas').click(function() {
+      return easyNote.clearAll();
+    });
     $('#pen-button').click(function() {
       return easyNote.activatePen();
     });
@@ -30,8 +33,17 @@
     $('#color-green').click(function() {
       return easyNote.setPenColor(easyNote.PEN_COLOR_GREEN);
     });
-    return $('#color-blue').click(function() {
+    $('#color-blue').click(function() {
       return easyNote.setPenColor(easyNote.PEN_COLOR_BLUE);
+    });
+    $('#paper-graph').click(function() {
+      return easyNote.graphPaper();
+    });
+    $('#paper-lined').click(function() {
+      return easyNote.linedPaper();
+    });
+    return $('#paper-regular').click(function() {
+      return easyNote.regularPaper();
     });
   });
 

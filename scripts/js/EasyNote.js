@@ -49,6 +49,27 @@
       }
     };
 
+    EasyNote.prototype.regularPaper = function() {
+      this.background.removeChildren();
+      return this.background.draw();
+    };
+
+    EasyNote.prototype.graphPaper = function() {
+      this.background.removeChildren();
+      this.grid();
+      return this.background.draw();
+    };
+
+    EasyNote.prototype.linedPaper = function() {
+      this.background.removeChildren();
+      this.makeRules('horizontal');
+      return this.background.draw();
+    };
+
+    EasyNote.prototype.clearAll = function() {
+      return this.canvas.clear();
+    };
+
     function EasyNote() {
       this.HEIGHT = Math.floor(this.WIDTH * 1.29411764706);
       this.setupStage();
@@ -145,7 +166,6 @@
     };
 
     EasyNote.prototype.grid = function() {
-      this.background.clear();
       return this.makeRules('both');
     };
 

@@ -2,6 +2,8 @@
 #functionality of EasyNote.coffee
 $(document).ready ->
    easyNote = new window.EasyNote()
+   $('#clear-canvas').click ->
+      easyNote.clearAll()
    $('#pen-button').click ->
       easyNote.activatePen()
    $('#eraser-button').click ->
@@ -22,3 +24,9 @@ $(document).ready ->
       easyNote.setPenColor easyNote.PEN_COLOR_GREEN
    $('#color-blue').click ->
       easyNote.setPenColor easyNote.PEN_COLOR_BLUE
+   $('#paper-graph').click ->
+      easyNote.graphPaper()
+   $('#paper-lined').click ->
+      easyNote.linedPaper()
+   $('#paper-regular').click ->
+      easyNote.regularPaper()
