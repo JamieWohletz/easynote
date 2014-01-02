@@ -75,6 +75,8 @@
       cnv = this.canvas.getCanvas()._canvas;
       w = window.open();
       w.document.write('<img src="' + cnv.toDataURL("image/png") + '" width="' + this.WIDTH + '" height="' + this.HEIGHT + '"/>');
+      w.document.close();
+      w.focus();
       w.print();
       return w.close();
     };

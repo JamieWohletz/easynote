@@ -63,6 +63,10 @@ class window.EasyNote
       #Unfortunately, we need to use a popup. On the plus side, the user never sees it. 
       w = window.open()
       w.document.write '<img src="' + cnv.toDataURL("image/png") + '" width="'+@WIDTH+'" height="'+@HEIGHT+'"/>'
+      #We need to close the document and focus on the window before printing for cross-browser functionality. 
+      #See this SO question: http://stackoverflow.com/questions/2555697/window-print-not-working-in-ie
+      w.document.close()
+      w.focus()
       w.print()
       w.close()
       
