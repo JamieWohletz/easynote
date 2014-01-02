@@ -15,3 +15,48 @@
 {
    float:center;
 }
+table
+{
+   text-align:center;
+}
+td
+{
+   text-align:center;
+}
+#color-red
+{
+   background:red;
+   height:100%;
+}
+#color-black
+{
+   background:black;
+   height:100%;
+}
+#color-blue
+{
+   background:blue;
+   height:100%;
+}
+#color-green
+{
+   background:green;
+   height:100%;
+}
+#size-table
+{
+   padding:0px;
+   margins:0px;
+}
+#size-small img
+{
+   height:5px;
+}
+#size-medium img
+{
+   height:10px;
+}
+#size-large img
+{
+   height:15px;
+}
