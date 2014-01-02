@@ -146,8 +146,8 @@
       this.stage.add(this.canvas);
       this.extendCanvas();
       cnv = this.canvas.getCanvas()._canvas;
-      offsetX = cnv.getBoundingClientRect().left;
-      offsetY = cnv.getBoundingClientRect().top;
+      offsetX = cnv.getBoundingClientRect().left + 10;
+      offsetY = cnv.getBoundingClientRect().top + 5;
       $(cnv).on('mousedown', function(event) {
         return _this.canvas.beginLine(event.pageX - offsetX, event.pageY - offsetY);
       });
