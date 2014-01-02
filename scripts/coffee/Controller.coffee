@@ -17,26 +17,37 @@ $(document).ready ->
       easyNote.activateEraser()
    $('#size-tiny').click ->
       easyNote.setPenSize easyNote.PEN_SIZE_TINY
+      select 'size', @
    $('#size-small').click ->
       easyNote.setPenSize easyNote.PEN_SIZE_SMALL
+      select 'size', @
    $('#size-medium').click ->
       easyNote.setPenSize easyNote.PEN_SIZE_MEDIUM
+      select 'size', @
    $('#size-large').click ->
       easyNote.setPenSize easyNote.PEN_SIZE_LARGE
+      select 'size', @
    $('#color-black').click ->
       easyNote.setPenColor easyNote.PEN_COLOR_DEFAULT
+      select 'color', @
    $('#color-red').click ->
       easyNote.setPenColor easyNote.PEN_COLOR_RED
+      select 'color', @
    $('#color-green').click ->
       easyNote.setPenColor easyNote.PEN_COLOR_GREEN
+      select 'color', @
    $('#color-blue').click ->
       easyNote.setPenColor easyNote.PEN_COLOR_BLUE
+      select 'color', @
    $('#paper-graph').click ->
       easyNote.graphPaper()
+      select 'paper', @
    $('#paper-lined').click ->
       easyNote.linedPaper()
+      select 'paper', @
    $('#paper-regular').click ->
       easyNote.regularPaper()
+      select 'paper', @
    $('#print-canvas').click ->
       easyNote.printCanvas()
    $('#print-all').click ->
@@ -50,3 +61,10 @@ $(document).ready ->
       
 showSaveHelp = ->
    alert "Right click the image that appears and click \"Save image as...\" to save your picture."
+   
+select = (prefix, selected) ->
+   $("button[id^='" + prefix + "']").each (index, element) ->
+      $(element).removeClass 'selected'
+      undefined
+   $(selected).addClass 'selected'
+   
