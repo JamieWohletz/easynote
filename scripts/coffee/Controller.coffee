@@ -3,7 +3,9 @@
 $(document).ready ->
    easyNote = new window.EasyNote()
    $('#clear-canvas').click ->
-      easyNote.clearAll()
+      confirmed = confirm 'Erase all drawings?'
+      if confirmed
+         easyNote.clearAll()
    $('#pen-button').click ->
       easyNote.activatePen()
    $('#eraser-button').click ->

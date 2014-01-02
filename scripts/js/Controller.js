@@ -4,7 +4,11 @@
     var easyNote;
     easyNote = new window.EasyNote();
     $('#clear-canvas').click(function() {
-      return easyNote.clearAll();
+      var confirmed;
+      confirmed = confirm('Erase all drawings?');
+      if (confirmed) {
+        return easyNote.clearAll();
+      }
     });
     $('#pen-button').click(function() {
       return easyNote.activatePen();
