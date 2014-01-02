@@ -1,26 +1,26 @@
 <!DOCTYPE HTML>
 <html>
    <head>
+      <link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" type="text/css" href="css/main.css"/>
    </head>
    
    <body>
-      <div id="header">
-         <h3 id="title">EasyNote</h3>
-      </div>
       <!--this table allows for a 2-column layout-->
       <table>
+         <tr><th><h2 id="title">easy note</h2></th></tr>
+         <tr>
          <td valign="top">
             <div id="control-panel">
                <table>
                <tr><th>Drawing</th></tr>
                <tr>
-                  <td><button id="pen-button" class="selected">Pen</button></td>
+                  <td><button id="pen-button" class="selected"><img src="images/pencil_icon.png"/></button></td>
                </tr>
                <tr>
-                  <td><button id="eraser-button">Eraser</button><br></td>
+                  <td><button id="eraser-button"><img src="images/eraser_icon.png"/></button><br></td>
                </tr>
-               <tr><td><button id="clear-canvas">Erase All</button></td></tr>
+               <tr><td><button id="clear-canvas"><img src="images/X_icon.png"/></button></td></tr>
                <tr>
                   <th>Size</th>
                </tr>
@@ -28,7 +28,7 @@
                   <td><button id="size-tiny"><img src="images/sizeicon.png"></button></td>
                </tr>
                <tr>
-                  <td><button id="size-small"><img src="images/sizeicon.png"></button></td>
+                  <td><button id="size-small" class="selected"><img src="images/sizeicon.png"></button></td>
                </tr>
                <tr>
                   <td><button id="size-medium"><img src="images/sizeicon.png"></button></td>
@@ -39,7 +39,7 @@
                <tr>
                   <th>Color</th>
                </tr>
-               <tr><td><button id="color-black">Black</button></td></tr>
+               <tr><td><button id="color-black" class="selected" >Black</button></td></tr>
                <tr><td><button id="color-red">Red</button></td></tr>
                <tr><td><button id="color-green">Green</button></td></tr>
                <tr><td><button id="color-blue">Blue</button></td></tr>
@@ -50,7 +50,7 @@
                   <td><button id="paper-regular">White</button></td>
                </tr>
                <tr>
-                  <td><button id="paper-graph">Graph</button></td>
+                  <td><button id="paper-graph" class="selected">Graph</button></td>
                </tr>
                <tr>
                   <td><button id="paper-lined">Lined</button></td>
@@ -72,6 +72,7 @@
             <div id="easynote">
             </div>
          </td>
+         </tr>
       </table>
       <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
       <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
