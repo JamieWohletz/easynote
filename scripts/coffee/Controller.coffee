@@ -36,3 +36,12 @@ $(document).ready ->
       easyNote.printCanvas()
    $('#print-all').click ->
       easyNote.printAll()
+   $('#save-canvas').click ->
+      #showSaveHelp()
+      easyNote.showCanvas()
+   $('#save-all').click ->
+      #showSaveHelp()
+      easyNote.showAll()
+      
+showSaveHelp = ->
+   alert "Right click the image that appears and click \"Save image as...\" to save your picture."

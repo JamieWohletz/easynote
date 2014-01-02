@@ -56,13 +56,47 @@ class window.EasyNote
       
    clearAll: ->
       @canvas.clear()
+
+   #Converts the canvas layer to an image and writes the image to a popup window. The created
+   #popup window is returned
+   showCanvas: ->
+      cnv = @canvas.getCanvas()._canvas
+      w = window.open()
+      w.document.write '<img src="' + cnv.toDataURL("image/png") + '" width="'+@WIDTH+'" height="'+@HEIGHT+'"/>'
+      w
+      
+   showAll: ->
+      w = window.open()
+      
+      cnv = @canvas.getCanvas()._canvas
+      bg = @background.getCanvas()._canvas
+      
+      cnvURL = cnv.toDataURL()
+      bgURL = bg.toDataURL()
+      
+      newCanvas = document.createElement('CANVAS')
+      newCanvas.width = @WIDTH
+      newCanvas.height = @HEIGHT
+      ctx = newCanvas.getContext('2d')
+      
+      bgImg = new Image
+      bgImg.onload = ->
+         ctx.drawImage(bgImg,0,0)
+      bgImg.src = bgURL
+      
+      cnvImg = new Image
+      #When the second image is finished loading, add it to the new canvas, get a dataURL representing that canvas's image, then write
+      #the image to the popup window so the user can save it.
+      cnvImg.onload = =>
+         ctx.drawImage(cnvImg,0,0)
+         w.document.write '<img src="' + newCanvas.toDataURL("image/png") + '" width="'+@WIDTH+'" height="'+@HEIGHT+'"/>'
+      cnvImg.src = cnvURL
+      
+      w
       
    #Prints ONLY the canvas layer -- the background will be ignored.   
    printCanvas: ->
-      cnv = @canvas.getCanvas()._canvas
-      #Unfortunately, we need to use a popup. On the plus side, the user never sees it. 
-      w = window.open()
-      w.document.write '<img src="' + cnv.toDataURL("image/png") + '" width="'+@WIDTH+'" height="'+@HEIGHT+'"/>'
+      w = showCanvas()
       #We need to close the document and focus on the window before printing for cross-browser functionality. 
       #See this SO question: http://stackoverflow.com/questions/2555697/window-print-not-working-in-ie
       w.document.close()

@@ -6,7 +6,12 @@ EasyNote Features (v1):
 5. Color picker
 6. Printable notes
 * 7. Pinch zoom * VERSION 2
+8. Save notes
 POSSIBLY
 Cloud note storage?
 Calculator?  
 Type-written notes?
+
+Please understand:
+This app caters to owners of touch devices with or without active digitizer support. 
+Its author owns a MS Surface and as such developed the app with that device in mind.

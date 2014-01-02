@@ -70,11 +70,43 @@
       return this.canvas.clear();
     };
 
-    EasyNote.prototype.printCanvas = function() {
+    EasyNote.prototype.showCanvas = function() {
       var cnv, w;
       cnv = this.canvas.getCanvas()._canvas;
       w = window.open();
       w.document.write('<img src="' + cnv.toDataURL("image/png") + '" width="' + this.WIDTH + '" height="' + this.HEIGHT + '"/>');
+      return w;
+    };
+
+    EasyNote.prototype.showAll = function() {
+      var bg, bgImg, bgURL, cnv, cnvImg, cnvURL, ctx, newCanvas, w,
+        _this = this;
+      w = window.open();
+      cnv = this.canvas.getCanvas()._canvas;
+      bg = this.background.getCanvas()._canvas;
+      cnvURL = cnv.toDataURL();
+      bgURL = bg.toDataURL();
+      newCanvas = document.createElement('CANVAS');
+      newCanvas.width = this.WIDTH;
+      newCanvas.height = this.HEIGHT;
+      ctx = newCanvas.getContext('2d');
+      bgImg = new Image;
+      bgImg.onload = function() {
+        return ctx.drawImage(bgImg, 0, 0);
+      };
+      bgImg.src = bgURL;
+      cnvImg = new Image;
+      cnvImg.onload = function() {
+        ctx.drawImage(cnvImg, 0, 0);
+        return w.document.write('<img src="' + newCanvas.toDataURL("image/png") + '" width="' + _this.WIDTH + '" height="' + _this.HEIGHT + '"/>');
+      };
+      cnvImg.src = cnvURL;
+      return w;
+    };
+
+    EasyNote.prototype.printCanvas = function() {
+      var w;
+      w = showCanvas();
       w.document.close();
       w.focus();
       w.print();
