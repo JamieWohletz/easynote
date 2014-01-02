@@ -138,8 +138,7 @@ class window.EasyNote
       #Note that we need to subtract the offset produced by the fact
       #that the canvas isn't flush with the screen corners
       cnv = @canvas.getCanvas()._canvas
-      #the 14 accounts for the size of the cursor
-      offsetX = cnv.getBoundingClientRect().left + 16
+      offsetX = cnv.getBoundingClientRect().left
       offsetY = cnv.getBoundingClientRect().top 
       $(cnv).on 'mousedown', (event) =>
          #offset = $(event.currentTarget).offset()
