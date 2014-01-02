@@ -1,24 +1,39 @@
+body, button
+{
+font-family:'Quando', serif;
+font-size:11px;
+}
 .selected
 {
-   background: white;
-   color: black;
+   border: inset 4px; 
 }
 #title
 {
    /*text-align:center;*/
    float:top;
+   text-align:center;
+   font-family:'Quando', serif;
+   font-size:16px;
+   font-style:bold;
 }
 #control-panel
 {
-   border: inset 2px;
+   overflow:auto;
 }
 #control-panel button
 {
-   width:100%;
+   width:50px;
+   height:50px;
+   padding:5px;
+}
+#control-panel img
+{
+   width:35px;
+   height:35px;
 }
 #easynote
 {
-   border:solid 2px;
+   border:outset 1px;
    overflow:hidden;
 }
 /*Add special rules for printing.
@@ -66,18 +81,22 @@ td
 #size-tiny img
 {
    height:2px;
+   width: 2px;
 }
 #size-small img
 {
    height:5px;
+   width: 5px;
 }
 #size-medium img
 {
    height:10px;
+   width: 10px;
 }
 #size-large img
 {
    height:15px;
+   width:15px; 
 }
 #upload-image
 {
