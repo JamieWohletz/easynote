@@ -6,3 +6,19 @@ $(document).ready ->
       easyNote.activatePen()
    $('#eraser-button').click ->
       easyNote.activateEraser()
+   $('#size-tiny').click ->
+      easyNote.setPenSize easyNote.PEN_SIZE_TINY
+   $('#size-small').click ->
+      easyNote.setPenSize easyNote.PEN_SIZE_SMALL
+   $('#size-medium').click ->
+      easyNote.setPenSize easyNote.PEN_SIZE_MEDIUM
+   $('#size-large').click ->
+      easyNote.setPenSize easyNote.PEN_SIZE_LARGE
+   $('#color-black').click ->
+      easyNote.setPenColor easyNote.PEN_COLOR_DEFAULT
+   $('#color-red').click ->
+      easyNote.setPenColor easyNote.PEN_COLOR_RED
+   $('#color-green').click ->
+      easyNote.setPenColor easyNote.PEN_COLOR_GREEN
+   $('#color-blue').click ->
+      easyNote.setPenColor easyNote.PEN_COLOR_BLUE

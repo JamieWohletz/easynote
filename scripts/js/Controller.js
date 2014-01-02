@@ -6,8 +6,32 @@
     $('#pen-button').click(function() {
       return easyNote.activatePen();
     });
-    return $('#eraser-button').click(function() {
+    $('#eraser-button').click(function() {
       return easyNote.activateEraser();
+    });
+    $('#size-tiny').click(function() {
+      return easyNote.setPenSize(easyNote.PEN_SIZE_TINY);
+    });
+    $('#size-small').click(function() {
+      return easyNote.setPenSize(easyNote.PEN_SIZE_SMALL);
+    });
+    $('#size-medium').click(function() {
+      return easyNote.setPenSize(easyNote.PEN_SIZE_MEDIUM);
+    });
+    $('#size-large').click(function() {
+      return easyNote.setPenSize(easyNote.PEN_SIZE_LARGE);
+    });
+    $('#color-black').click(function() {
+      return easyNote.setPenColor(easyNote.PEN_COLOR_DEFAULT);
+    });
+    $('#color-red').click(function() {
+      return easyNote.setPenColor(easyNote.PEN_COLOR_RED);
+    });
+    $('#color-green').click(function() {
+      return easyNote.setPenColor(easyNote.PEN_COLOR_GREEN);
+    });
+    return $('#color-blue').click(function() {
+      return easyNote.setPenColor(easyNote.PEN_COLOR_BLUE);
     });
   });
 

@@ -1,10 +1,20 @@
 class window.EasyNote
-   WIDTH: (window.innerWidth / 100) * 80
+   WIDTH: (window.innerWidth / 100) * 90
    #The height is set in the constructor and is proportional 
    #to the window width; this ratio comes from 
    #standard letter paper dimensions (8.5 x 11). 
    HEIGHT: null
+   #The distance between rule lines (lined paper, graph paper)
    LINE_SPACE: 20
+   #Pen constants
+   PEN_SIZE_TINY: 2
+   PEN_SIZE_SMALL: 5
+   PEN_SIZE_MEDIUM: 10
+   PEN_SIZE_LARGE: 15
+   PEN_COLOR_RED: 'red'
+   PEN_COLOR_GREEN: 'green'
+   PEN_COLOR_BLUE: 'blue'
+   PEN_COLOR_DEFAULT: 'black'
    
    #The background layer
    background: null
@@ -18,7 +28,17 @@ class window.EasyNote
    #Sets the "pen" to draw mode. This is the default.
    activatePen: ->
       @canvas.startDrawing()
+      
+   setPenSize: (size) ->
+      if size && parseInt(size) isnt NaN
+         @canvas.penSize = size
    
+   setPenColor: (color) ->
+      if color isnt @PEN_COLOR_RED and color isnt @PEN_COLOR_GREEN and color isnt @PEN_COLOR_BLUE 
+         @canvas.penColor = @PEN_COLOR_DEFAULT
+      else
+         @canvas.penColor = color
+         
    constructor: ->
       @HEIGHT = Math.floor(@WIDTH * 1.29411764706)
       @setupStage()
@@ -58,16 +78,14 @@ class window.EasyNote
          @canvas.drawLine event.pageX - offsetX, event.pageY - offsetY
       $(cnv).on 'mouseup', =>
          @canvas.endLine()
-      $(cnv).click =>
-         @canvas.drawPoint event.pageX - offsetX, event.pageY - offsetY
          
    #Adds additional functionality to the @canvas object so that the user can draw and erase.
    extendCanvas: ->
       @canvas.drawing = false
       @canvas.context = @canvas.getCanvas()._canvas.getContext '2d'
       #set default drawing values
-      @canvas.penColor = 'black'
-      @canvas.penSize = '5'
+      @canvas.penColor = @PEN_COLOR_DEFAULT
+      @canvas.penSize = @PEN_SIZE_SMALL
       @canvas.context.lineCap='round'
       @canvas.context.lineJoin='round'
       @canvas.context.strokeStyle = @canvas.penColor
@@ -76,6 +94,8 @@ class window.EasyNote
       @canvas.beginLine = (x,y) ->
          @drawing = true
          #default values below; can and will be updated on the fly
+         @context.strokeStyle = @penColor
+         @context.lineWidth = @penSize
          @context.beginPath()
          @context.moveTo(x,y)
       
@@ -87,10 +107,6 @@ class window.EasyNote
          
       @canvas.endLine = ->
          @drawing = false
-        
-      #only used on mouseclick  
-      @canvas.drawPoint = (x,y) ->
-         @context.fillRect(x,y,5,5)
       
       #Modifies the canvas context so that the user mouse actions
       #erase instead of draw.

@@ -48,6 +48,10 @@ td
    padding:0px;
    margins:0px;
 }
+#size-tiny img
+{
+   height:2px;
+}
 #size-small img
 {
    height:5px;
