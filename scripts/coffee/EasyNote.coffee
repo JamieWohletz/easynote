@@ -1,4 +1,4 @@
-class EasyNote
+class window.EasyNote
    WIDTH: (window.innerWidth / 100) * 80
    #The height is set in the constructor and is proportional 
    #to the window width; this ratio comes from 
@@ -10,6 +10,14 @@ class EasyNote
    background: null
    #The layer the user draws on
    canvas: null
+   
+   #Sets the pen to eraser mode
+   activateEraser: ->
+      @canvas.startErasing()
+      
+   #Sets the "pen" to draw mode. This is the default.
+   activatePen: ->
+      @canvas.startDrawing()
    
    constructor: ->
       @HEIGHT = Math.floor(@WIDTH * 1.29411764706)
@@ -58,10 +66,12 @@ class EasyNote
       @canvas.drawing = false
       @canvas.context = @canvas.getCanvas()._canvas.getContext '2d'
       #set default drawing values
+      @canvas.penColor = 'black'
+      @canvas.penSize = '5'
       @canvas.context.lineCap='round'
       @canvas.context.lineJoin='round'
-      @canvas.context.strokeStyle = 'black'
-      @canvas.context.lineWidth = '5'         
+      @canvas.context.strokeStyle = @canvas.penColor
+      @canvas.context.lineWidth = @canvas.penSize
       #add in custom functions
       @canvas.beginLine = (x,y) ->
          @drawing = true
@@ -81,6 +91,16 @@ class EasyNote
       #only used on mouseclick  
       @canvas.drawPoint = (x,y) ->
          @context.fillRect(x,y,5,5)
+      
+      #Modifies the canvas context so that the user mouse actions
+      #erase instead of draw.
+      @canvas.startErasing = ->
+         @context.globalCompositeOperation = 'destination-out'
+         @context.strokeStyle = 'rgba(0,0,0,1)'
+      
+      @canvas.startDrawing = ->
+         @context.globalCompositeOperation = 'source-over'
+         @context.strokeStyle = @penColor
 
    makeRule: (coord, horizontal) ->
       points
@@ -109,6 +129,3 @@ class EasyNote
       @stage = null
       @setupStage()
       @stage.add(@background)
-      
-#Create the class      
-new EasyNote
