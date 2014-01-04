@@ -138,13 +138,16 @@ class window.EasyNote
       #Note that we need to subtract the offset produced by the fact
       #that the canvas isn't flush with the screen corners
       cnv = @canvas.getCanvas()._canvas
-      $(cnv).on 'mousedown', (event) =>
+      $(cnv).on 'mousedown touchstart', (event) =>
+         event.preventDefault()
          offset = $(cnv).offset()
          @canvas.beginLine event.pageX - offset.left, event.pageY - offset.top
-      $(cnv).on 'mousemove', (event) =>
+      $(cnv).on 'mousemove touchmove', (event) =>
+         event.preventDefault()
          offset = $(cnv).offset()
          @canvas.drawLine event.pageX - offset.left, event.pageY - offset.top
-      $(cnv).on 'mouseup', =>
+      $(cnv).on 'mouseup touchend', =>
+         event.preventDefault()
          @canvas.endLine()
          
    #Adds additional functionality to the @canvas object so that the user can draw and erase.

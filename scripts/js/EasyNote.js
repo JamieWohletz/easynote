@@ -146,17 +146,20 @@
       this.stage.add(this.canvas);
       this.extendCanvas();
       cnv = this.canvas.getCanvas()._canvas;
-      $(cnv).on('mousedown', function(event) {
+      $(cnv).on('mousedown touchstart', function(event) {
         var offset;
+        event.preventDefault();
         offset = $(cnv).offset();
         return _this.canvas.beginLine(event.pageX - offset.left, event.pageY - offset.top);
       });
-      $(cnv).on('mousemove', function(event) {
+      $(cnv).on('mousemove touchmove', function(event) {
         var offset;
+        event.preventDefault();
         offset = $(cnv).offset();
         return _this.canvas.drawLine(event.pageX - offset.left, event.pageY - offset.top);
       });
-      return $(cnv).on('mouseup', function() {
+      return $(cnv).on('mouseup touchend', function() {
+        event.preventDefault();
         return _this.canvas.endLine();
       });
     };
