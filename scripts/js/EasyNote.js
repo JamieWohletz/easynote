@@ -139,22 +139,22 @@
     };
 
     EasyNote.prototype.setupCanvas = function() {
-      var cnv, offsetX, offsetY,
+      var cnv,
         _this = this;
       this.canvas = new Kinetic.Layer();
       window.canvas = this.canvas;
       this.stage.add(this.canvas);
       this.extendCanvas();
       cnv = this.canvas.getCanvas()._canvas;
-      offsetX = cnv.getBoundingClientRect().left + 10;
-      offsetY = cnv.getBoundingClientRect().top + 5;
       $(cnv).on('mousedown', function(event) {
-        return _this.canvas.beginLine(event.pageX - offsetX, event.pageY - offsetY);
+        var offset;
+        offset = $(cnv).offset();
+        return _this.canvas.beginLine(event.pageX - offset.left, event.pageY - offset.top);
       });
       $(cnv).on('mousemove', function(event) {
         var offset;
-        offset = $(event.currentTarget).offset();
-        return _this.canvas.drawLine(event.pageX - offsetX, event.pageY - offsetY);
+        offset = $(cnv).offset();
+        return _this.canvas.drawLine(event.pageX - offset.left, event.pageY - offset.top);
       });
       return $(cnv).on('mouseup', function() {
         return _this.canvas.endLine();

@@ -138,14 +138,12 @@ class window.EasyNote
       #Note that we need to subtract the offset produced by the fact
       #that the canvas isn't flush with the screen corners
       cnv = @canvas.getCanvas()._canvas
-      offsetX = cnv.getBoundingClientRect().left
-      offsetY = cnv.getBoundingClientRect().top 
       $(cnv).on 'mousedown', (event) =>
-         #offset = $(event.currentTarget).offset()
-         @canvas.beginLine event.pageX - offsetX, event.pageY - offsetY
+         offset = $(cnv).offset()
+         @canvas.beginLine event.pageX - offset.left, event.pageY - offset.top
       $(cnv).on 'mousemove', (event) =>
-         offset = $(event.currentTarget).offset()
-         @canvas.drawLine event.pageX - offsetX, event.pageY - offsetY
+         offset = $(cnv).offset()
+         @canvas.drawLine event.pageX - offset.left, event.pageY - offset.top
       $(cnv).on 'mouseup', =>
          @canvas.endLine()
          
