@@ -139,24 +139,38 @@
     };
 
     EasyNote.prototype.setupCanvas = function() {
-      var cnv,
+      var cnv, getCoords,
         _this = this;
       this.canvas = new Kinetic.Layer();
       window.canvas = this.canvas;
       this.stage.add(this.canvas);
       this.extendCanvas();
+      getCoords = function(e) {
+        var x, y;
+        e.preventDefault();
+        x = e.pageX;
+        y = e.pageY;
+        if (e.originalEvent && e.originalEvent.targetTouches) {
+          x = e.originalEvent.targetTouches[0].pageX;
+          y = e.originalEvent.targetTouches[0].pageY;
+        }
+        return {
+          x: x,
+          y: y
+        };
+      };
       cnv = this.canvas.getCanvas()._canvas;
       $(cnv).on('mousedown touchstart', function(event) {
-        var offset;
-        event.preventDefault();
+        var coords, offset;
+        coords = getCoords(event);
         offset = $(cnv).offset();
-        return _this.canvas.beginLine(event.pageX - offset.left, event.pageY - offset.top);
+        return _this.canvas.beginLine(coords.x - offset.left, coords.y - offset.top);
       });
       $(cnv).on('mousemove touchmove', function(event) {
-        var offset;
-        event.preventDefault();
+        var coords, offset;
+        coords = getCoords(event);
         offset = $(cnv).offset();
-        return _this.canvas.drawLine(event.pageX - offset.left, event.pageY - offset.top);
+        return _this.canvas.drawLine(coords.x - offset.left, coords.y - offset.top);
       });
       return $(cnv).on('mouseup touchend', function() {
         event.preventDefault();

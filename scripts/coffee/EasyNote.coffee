@@ -134,18 +134,27 @@ class window.EasyNote
       #Extend the canvas object's API
       @extendCanvas()
       
+      getCoords = (e) ->
+         e.preventDefault()
+         x = e.pageX
+         y = e.pageY
+         #account for mobile devices
+         if e.originalEvent and e.originalEvent.targetTouches
+            x = e.originalEvent.targetTouches[0].pageX
+            y = e.originalEvent.targetTouches[0].pageY
+         {x: x, y: y}
       #Add mouse listeners to the actual canvas object
       #Note that we need to subtract the offset produced by the fact
       #that the canvas isn't flush with the screen corners
       cnv = @canvas.getCanvas()._canvas
       $(cnv).on 'mousedown touchstart', (event) =>
-         event.preventDefault()
+         coords = getCoords(event)
          offset = $(cnv).offset()
-         @canvas.beginLine event.pageX - offset.left, event.pageY - offset.top
+         @canvas.beginLine coords.x - offset.left, coords.y - offset.top
       $(cnv).on 'mousemove touchmove', (event) =>
-         event.preventDefault()
+         coords = getCoords(event)
          offset = $(cnv).offset()
-         @canvas.drawLine event.pageX - offset.left, event.pageY - offset.top
+         @canvas.drawLine coords.x - offset.left, coords.y - offset.top
       $(cnv).on 'mouseup touchend', =>
          event.preventDefault()
          @canvas.endLine()
