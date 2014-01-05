@@ -95,8 +95,8 @@
       w = window.open();
       cnv = this.canvas.getCanvas()._canvas;
       bg = this.background.getCanvas()._canvas;
-      cnvURL = cnv.toDataURL();
-      bgURL = bg.toDataURL();
+      cnvURL = cnv.toDataURL('image/png');
+      bgURL = bg.toDataURL('image/png');
       newCanvas = document.createElement('CANVAS');
       newCanvas.width = this.WIDTH;
       newCanvas.height = this.HEIGHT;

@@ -81,8 +81,8 @@ class window.EasyNote
       cnv = @canvas.getCanvas()._canvas
       bg = @background.getCanvas()._canvas
       
-      cnvURL = cnv.toDataURL()
-      bgURL = bg.toDataURL()
+      cnvURL = cnv.toDataURL('image/png')
+      bgURL = bg.toDataURL('image/png')
       
       newCanvas = document.createElement('CANVAS')
       newCanvas.width = @WIDTH

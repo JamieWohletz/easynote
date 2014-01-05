@@ -18,7 +18,7 @@
       this.currentPage = 0;
       this.pages = [];
       if (!this.restoreState()) {
-        this.pages.push(this.CANVAS.getCanvas().toDataURL());
+        this.pages.push(this.CANVAS.toDataURL('image/png'));
       }
     }
 
@@ -44,7 +44,7 @@
     };
 
     Notebook.prototype.savePage = function() {
-      return this.pages[this.currentPage] = this.CANVAS.getCanvas().toDataURL();
+      return this.pages[this.currentPage] = this.CANVAS.toDataURL('image/png');
     };
 
     Notebook.prototype.loadPage = function() {

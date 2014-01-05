@@ -18,7 +18,7 @@ class window.Notebook
       #Try to restore a previous state; if there is none, just load regularly
       unless @restoreState()
          #We assume the starting page is the first page in the notebook
-         @pages.push @CANVAS.getCanvas().toDataURL()
+         @pages.push @CANVAS.toDataURL('image/png')
       
    getCurrentPageIndex: ->
       @currentPage+1
@@ -39,7 +39,7 @@ class window.Notebook
          @loadPage()
          
    savePage: ->
-      @pages[@currentPage] = @CANVAS.getCanvas().toDataURL()
+      @pages[@currentPage] = @CANVAS.toDataURL('image/png')
    
    loadPage: ->
       @CANVAS.destroyChildren()
