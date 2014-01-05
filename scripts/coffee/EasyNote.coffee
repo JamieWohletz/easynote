@@ -1,6 +1,6 @@
 class window.EasyNote
-   #The width is either 50% the window width OR 900 pixels. It will never go below 900 pixels.
-   WIDTH: Math.max (window.innerWidth / 100) * 50, 900
+   #Width is set in the constructor
+   WIDTH: null
    #The height is set in the constructor and is proportional 
    #to the window width; this ratio comes from 
    #standard letter paper dimensions (8.5 x 11). 
@@ -110,7 +110,8 @@ class window.EasyNote
       window.print();
          
    constructor: ->
-      @HEIGHT = Math.floor(@WIDTH * 1.29411764706)
+      @WIDTH = if window.innerWidth >= 900 then (window.innerWidth / 100) * 50 else window.innerWidth - $('#control-panel').width()
+      @HEIGHT = Math.max Math.floor(@WIDTH * 1.29411764706), $('#control-panel').height()
       @setupStage()
       @setupBackground()
       @setupCanvas()

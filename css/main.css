@@ -5,7 +5,7 @@ font-size:11px;
 }
 .selected
 {
-   border: inset 4px; 
+   border: inset 2px; 
 }
 #title
 {
@@ -15,18 +15,27 @@ font-size:11px;
    font-family:'Quando', serif;
    font-size:16px;
    font-style:bold;
+   background:light-gray;
 }
-#control-panel
+table
 {
-   overflow:auto;
+   text-align:center;
+   border-collapse:collapse; 
 }
-#control-panel button
+th,td
+{
+   text-align:center;
+   padding:0px; 
+}
+button
 {
    width:50px;
    height:50px;
    padding:5px;
+   background:white; 
+   text-align:center;
 }
-#control-panel img
+img
 {
    width:35px;
    height:35px;
@@ -44,14 +53,6 @@ so the only thing visible to the browser is the easynote div.*/
      {
       display:none;
    }
-}
-table
-{
-   text-align:center;
-}
-td
-{
-   text-align:center;
 }
 #color-red
 {

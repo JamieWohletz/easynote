@@ -8,67 +8,51 @@
    <body>
       <!--this table allows for a 2-column layout-->
       <table>
-         <tr><th><h2 id="title">easy note</h2></th></tr>
+         <tr><th colspan="2" id="title">easy note</th></tr>
          <tr>
-         <td valign="top">
-            <div id="control-panel">
+         <td valign="top" id="control-panel">
+            <!--<div id="control-panel">-->
                <table>
-               <tr><th>Drawing</th></tr>
-               <tr>
-                  <td><button title="Click and drag drawing" id="pen-button" class="selected"><img src="images/pencil_icon.png"/></button></td>
-               </tr>
-               <tr>
-                  <td><button title="Click and drag erasing" id="eraser-button"><img src="images/eraser_icon.png"/></button><br></td>
-               </tr>
-               <tr><td><button title="Clear all drawings from the paper" id="clear-canvas"><img src="images/X_icon.png"/></button></td></tr>
-               <tr>
-                  <th>Size</th>
-               </tr>
-               <tr>
-                  <td><button title="3 pixels" id="size-tiny"><img src="images/sizeicon.png"></button></td>
-               </tr>
-               <tr>
-                  <td><button title="5 pixels" id="size-small" class="selected"><img src="images/sizeicon.png"></button></td>
-               </tr>
-               <tr>
-                  <td><button title="10 pixels" id="size-medium"><img src="images/sizeicon.png"></button></td>
-               </tr>
-               <tr>
-                  <td><button title ="15 pixels" id="size-large"><img src="images/sizeicon.png"></button></td>
-               </tr>
-               <tr>
-                  <th>Color</th>
-               </tr>
-               <tr><td><button id="color-black" class="selected" >Black</button></td></tr>
-               <tr><td><button id="color-red">Red</button></td></tr>
-               <tr><td><button id="color-green">Green</button></td></tr>
-               <tr><td><button id="color-blue">Blue</button></td></tr>
-               <tr>
-                  <th>Background</th>
-               </tr>
-               <tr>
-                  <td><button title="Blank white paper" id="paper-regular">White</button></td>
-               </tr>
-               <tr>
-                  <td><button title="Graph paper" id="paper-graph" class="selected">Graph</button></td>
-               </tr>
-               <tr>
-                  <td><button title="College-ruled paper" id="paper-lined">Lined</button></td>
-               </tr>
-               <tr>
-                  <th>Printing</th>
-               </tr>
-               <tr><td><button title="Print only your drawings (no background)" id="print-canvas">Print Canvas</button></td></tr>
-               <tr><td><button title="Print your drawings and the background" id="print-all">Print All</button></td></tr>
-               <tr>
-                  <th>Saving</th>
-               </tr>
-               <tr><td><button title="Save your drawings (no background) to your computer" id="save-canvas">Save Canvas</button></td></tr>
-               <tr><td><button title="Save the background and your drawings to your computer" id="save-all">Save All</button></td></tr>
+                  <tr>
+                     <td><button title="Click and drag drawing" id="pen-button" class="selected"><img src="images/pencil_icon.png"/></button></td>
+                  </tr>
+                  <tr>
+                     <td><button title="Click and drag erasing" id="eraser-button"><img src="images/eraser_icon.png"/></button><br></td>
+                  </tr>
+                  <tr><td><button title="Clear all drawings from the paper" id="clear-canvas"><img src="images/X_icon.png"/></button></td></tr>
+                  <tr>
+                     <td><button title="3 pixels brush size" id="size-tiny"><img src="images/sizeicon.png"></button></td>
+                  </tr>
+                  <tr>
+                     <td><button title="5 pixels brush size" id="size-small" class="selected"><img src="images/sizeicon.png"></button></td>
+                  </tr>
+                  <tr>
+                     <td><button title="10 pixels brush size" id="size-medium"><img src="images/sizeicon.png"></button></td>
+                  </tr>
+                  <tr>
+                     <td><button title ="15 pixels brush size" id="size-large"><img src="images/sizeicon.png"></button></td>
+                  </tr>
+                  <tr><td><button title="Black paint" id="color-black" class="selected" ><img src="images/blank.png"></button></td></tr>
+                  <tr><td><button title="Red paint" id="color-red"><img src="images/blank.png"></button></td></tr>
+                  <tr><td><button title="Green paint" id="color-green"><img src="images/blank.png"></button></td></tr>
+                  <tr><td><button title="Blue paint" id="color-blue"><img src="images/blank.png"></button></td></tr>
+                  <tr>
+                     <td><button title="Blank white paper" id="paper-regular">White</button></td>
+                  </tr>
+                  <tr>
+                     <td><button title="Graph paper" id="paper-graph" class="selected">Graph</button></td>
+                  </tr>
+                  <tr>
+                     <td><button title="College-ruled paper" id="paper-lined">Lined</button></td>
+                  </tr>
+                  <tr><td><button title="Print only your drawings (no background)" id="print-canvas">Print Art</button></td></tr>
+                  <tr><td><button title="Print your drawings and the background" id="print-all">Print All</button></td></tr>
+                  <tr><td><button title="Save your drawings (no background) to your computer" id="save-canvas">Save Art</button></td></tr>
+                  <tr><td><button title="Save the background and your drawings to your computer" id="save-all">Save All</button></td></tr>
                </table>
-            </div>
+            <!--</div>-->
          </td>
-         <td>
+         <td valign="top">
             <div id="easynote">
             </div>
          </td>
