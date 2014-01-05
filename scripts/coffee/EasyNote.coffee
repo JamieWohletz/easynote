@@ -1,4 +1,6 @@
 class window.EasyNote
+   #The notebook object that handles paging
+   NOTEBOOK: null
    #Width is set in the constructor
    WIDTH: null
    #The height is set in the constructor and is proportional 
@@ -6,7 +8,7 @@ class window.EasyNote
    #standard letter paper dimensions (8.5 x 11). 
    HEIGHT: null
    #The distance between rule lines (lined paper, graph paper)
-   LINE_SPACE: 20
+   LINE_SPACE: 25
    #Pen constants
    PEN_SIZE_TINY: 2
    PEN_SIZE_SMALL: 5
@@ -28,9 +30,7 @@ class window.EasyNote
       @setupStage()
       @setupBackground()
       @setupCanvas()
-      #reload the last state if available
-      if localStorage && localStorage['canvas']
-         @restoreState()
+      @NOTEBOOK = new window.Notebook(@canvas)
    
    #Sets the pen to eraser mode
    activateEraser: ->
@@ -116,23 +116,7 @@ class window.EasyNote
    #Prints both the background and the canvas.
    printAll: ->
       #This relies on special media-query CSS. See main.css.
-      window.print();
-   
-   #Saves both the foreground and background images in local storage.
-   saveState: ->
-      return if !localStorage
-      localStorage['canvas'] = @canvas.getCanvas()._canvas.toDataURL("image/png")
-      
-   #Restores the previously saved state (see saveState())
-   restoreState: ->
-      return if !localStorage
-      ctx = @canvas.getCanvas()._canvas.getContext '2d'
-      #load the image
-      cnvImg = new Image
-      cnvImg.onload = ->
-         ctx.drawImage(cnvImg,0,0)
-      cnvImg.src = localStorage['canvas']
-      
+      window.print();   
       
    setupStage: ->
       @stage = new Kinetic.Stage
@@ -147,7 +131,6 @@ class window.EasyNote
       
    setupCanvas: ->
       @canvas = new Kinetic.Layer()
-      window.canvas = @canvas
       @stage.add(@canvas)
       #Unfortunately, we have to work outside of KineticJS to get drawing functionality.
       #Extend the canvas object's API
@@ -174,7 +157,7 @@ class window.EasyNote
          coords = getCoords(event)
          offset = $(cnv).offset()
          @canvas.drawLine coords.x - offset.left, coords.y - offset.top
-      $(cnv).on 'mouseup touchend', =>
+      $(cnv).on 'mouseup touchend', (event) =>
          event.preventDefault()
          @canvas.endLine()
          

@@ -13,7 +13,7 @@ font-size:11px;
    float:top;
    text-align:center;
    font-family:'Quando', serif;
-   font-size:16px;
+   font-size:15px;
    font-style:bold;
    background:light-gray;
 }
@@ -99,7 +99,23 @@ so the only thing visible to the browser is the easynote div.*/
    height:15px;
    width:15px; 
 }
+#nav-buttons button
+{
+   height:30px;
+   width:30px;
+   padding:3px;
+}
+#nav-buttons button img
+{
+   height:20px;
+   width:20px;
+}
 #upload-image
 {
    display:none;
+}
+#page-number-wrapper
+{
+   padding:2px;
+   font-weight:bold;
 }

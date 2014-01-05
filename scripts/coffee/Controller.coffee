@@ -1,9 +1,22 @@
 #The code here connects the UI (EasyNote.html) to the 
-#functionality of EasyNote.coffee
+#functionality of EasyNote.coffee and Notebook.coffee
 $(document).ready ->
    easyNote = new window.EasyNote()
+   #simple helper function that updates the displayed notebook page number
+   #this function needs to be here because of easyNote's scope.
+   setPageNumber = ->
+      $('#page-number').text(easyNote.NOTEBOOK.getCurrentPageIndex())
+   #set the initial page number
+   setPageNumber()
+   
+   $('#prev-page').click ->
+      easyNote.NOTEBOOK.previousPage()
+      setPageNumber()
+   $('#next-page').click ->
+      easyNote.NOTEBOOK.nextPage()
+      setPageNumber()
+   
    $('#clear-canvas').click ->
-      console.log 'derp'
       confirmed = window.confirm 'Erase all drawings?'
       if confirmed
          easyNote.clearAll()
@@ -53,21 +66,16 @@ $(document).ready ->
    $('#print-all').click ->
       easyNote.printAll()
    $('#save-canvas').click ->
-      #showSaveHelp()
       easyNote.showCanvas()
    $('#save-all').click ->
-      #showSaveHelp()
       easyNote.showAll()
-   window.onbeforeunload = ->
-      easyNote.saveState()
-      return undefined
       
-showSaveHelp = ->
-   alert "Right click the image that appears and click \"Save image as...\" to save your picture."
-   
+   window.onbeforeunload = ->
+      easyNote.NOTEBOOK.saveState()
+      return undefined
+
 select = (prefix, selected) ->
    $("button[id^='" + prefix + "']").each (index, element) ->
       $(element).removeClass 'selected'
       undefined
    $(selected).addClass 'selected'
-   

@@ -8,7 +8,14 @@
    <body>
       <!--this table allows for a 2-column layout-->
       <table>
-         <tr><th colspan="2" id="title">easy note</th></tr>
+         <tr>
+            <th id="title">easy<br>note</th>
+            <td id="nav-buttons">
+               <button id="prev-page"><img src="images/arrow-left.png"/></button>
+                  <span id="page-number-wrapper">Page <span id="page-number">?</span></span>
+               <button id="next-page"><img src="images/arrow-right.png"/></button>
+            </td>
+         </tr>
          <tr>
          <td valign="top" id="control-panel">
             <!--<div id="control-panel">-->
@@ -37,13 +44,13 @@
                   <tr><td><button title="Green paint" id="color-green"><img src="images/blank.png"></button></td></tr>
                   <tr><td><button title="Blue paint" id="color-blue"><img src="images/blank.png"></button></td></tr>
                   <tr>
-                     <td><button title="Blank white paper" id="paper-regular">White</button></td>
+                     <td><button title="Blank white paper" id="paper-regular">White Paper</button></td>
                   </tr>
                   <tr>
-                     <td><button title="Graph paper" id="paper-graph" class="selected">Graph</button></td>
+                     <td><button title="Graph paper" id="paper-graph" class="selected">Graph Paper</button></td>
                   </tr>
                   <tr>
-                     <td><button title="College-ruled paper" id="paper-lined">Lined</button></td>
+                     <td><button title="College-ruled paper" id="paper-lined">Lined Paper</button></td>
                   </tr>
                   <tr><td><button title="Print only your drawings (no background)" id="print-canvas">Print Art</button></td></tr>
                   <tr><td><button title="Print your drawings and the background" id="print-all">Print All</button></td></tr>
@@ -60,6 +67,7 @@
       </table>
       <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
       <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
+      <script src="scripts/js/Notebook.js"></script>
       <script src="scripts/js/EasyNote.js"></script>
       <script src="scripts/js/Controller.js"></script>
    </body>
