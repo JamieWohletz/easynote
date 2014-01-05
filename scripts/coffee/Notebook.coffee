@@ -5,9 +5,13 @@ class window.Notebook
    @currentPage: null
    #Array of 'pages', which are just data URLs corresponding to what the user has drawn
    @pages: null
-   #The notebook directly corresponds to a canvas element, so one
-   #is required by its constructor
+   #LocalStorage keys -- set in constructor
+   @CURRENT_PAGE_KEY: null 
+   @NOTEBOOK_KEY: null
+   
    constructor: (canvas) ->
+      @CURRENT_PAGE_KEY = 'easynote_currentPage'
+      @NOTEBOOK_KEY = 'easynote_notebook'
       @CANVAS = canvas
       @currentPage = 0
       @pages = []
@@ -51,16 +55,16 @@ class window.Notebook
       
    #Saves each notebook page (as well as the current page pointer) in local storage for later retrieval.
    saveState: ->
-      return if !localStorage
-      localStorage['easynote_currentPage'] = @currentPage 
-      localStorage['easynote_notebook'] = JSON.stringify(@pages)
+      return if typeof window.localStorage isnt 'object'
+      localStorage[@CURRENT_PAGE_KEY] = @currentPage 
+      localStorage[@NOTEBOOK_KEY] = JSON.stringify(@pages)
       
    #Restores the previously saved state (see saveState())
    restoreState: ->
-      return false if !localStorage? or !localStorage['easynote_notebook']? or !localStorage['easynote_currentPage']?
+      return false if typeof window.localStorage isnt 'object' or !localStorage[@NOTEBOOK_KEY]? or !localStorage[@CURRENT_PAGE_KEY]?
       
-      @pages = JSON.parse localStorage['easynote_notebook']
-      @currentPage = parseInt(localStorage['easynote_currentPage'])
+      @pages = JSON.parse localStorage[@NOTEBOOK_KEY]
+      @currentPage = parseInt(localStorage[@CURRENT_PAGE_KEY])
       ctx = @CANVAS.getContext()
       #load the current page
       cnvImg = new Image

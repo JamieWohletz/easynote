@@ -7,7 +7,13 @@
 
     Notebook.pages = null;
 
+    Notebook.CURRENT_PAGE_KEY = null;
+
+    Notebook.NOTEBOOK_KEY = null;
+
     function Notebook(canvas) {
+      this.CURRENT_PAGE_KEY = 'easynote_currentPage';
+      this.NOTEBOOK_KEY = 'easynote_notebook';
       this.CANVAS = canvas;
       this.currentPage = 0;
       this.pages = [];
@@ -58,20 +64,20 @@
     };
 
     Notebook.prototype.saveState = function() {
-      if (!localStorage) {
+      if (typeof window.localStorage !== 'object') {
         return;
       }
-      localStorage['easynote_currentPage'] = this.currentPage;
-      return localStorage['easynote_notebook'] = JSON.stringify(this.pages);
+      localStorage[this.CURRENT_PAGE_KEY] = this.currentPage;
+      return localStorage[this.NOTEBOOK_KEY] = JSON.stringify(this.pages);
     };
 
     Notebook.prototype.restoreState = function() {
       var cnvImg, ctx;
-      if ((typeof localStorage === "undefined" || localStorage === null) || (localStorage['easynote_notebook'] == null) || (localStorage['easynote_currentPage'] == null)) {
+      if (typeof window.localStorage !== 'object' || (localStorage[this.NOTEBOOK_KEY] == null) || (localStorage[this.CURRENT_PAGE_KEY] == null)) {
         return false;
       }
-      this.pages = JSON.parse(localStorage['easynote_notebook']);
-      this.currentPage = parseInt(localStorage['easynote_currentPage']);
+      this.pages = JSON.parse(localStorage[this.NOTEBOOK_KEY]);
+      this.currentPage = parseInt(localStorage[this.CURRENT_PAGE_KEY]);
       ctx = this.CANVAS.getContext();
       cnvImg = new Image;
       cnvImg.onload = function() {
