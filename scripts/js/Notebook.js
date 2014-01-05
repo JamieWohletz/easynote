@@ -18,7 +18,7 @@
       this.currentPage = 0;
       this.pages = [];
       if (!this.restoreState()) {
-        this.pages.push(this.CANVAS.getCanvas().toDataURL());
+        this.pages.push(this.CANVAS.getCanvas().toDataURL('image/png'));
       }
     }
 
@@ -44,7 +44,7 @@
     };
 
     Notebook.prototype.savePage = function() {
-      return this.pages[this.currentPage] = this.CANVAS.getCanvas().toDataURL();
+      return this.pages[this.currentPage] = this.CANVAS.getCanvas().toDataURL('image/png');
     };
 
     Notebook.prototype.loadPage = function() {
@@ -57,8 +57,10 @@
       }
       ctx = this.CANVAS.getContext();
       dataURL = this.pages[this.currentPage];
+      console.log('our data url is ', dataURL);
       img = new Image;
       img.onload = function() {
+        console.log('attempting to load ', img);
         return ctx.drawImage(img, 0, 0, _this.CANVAS.getCanvas().width, _this.CANVAS.getCanvas().height);
       };
       return img.src = dataURL;
