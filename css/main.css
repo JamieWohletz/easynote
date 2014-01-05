@@ -10,12 +10,9 @@ font-size:11px;
 #title
 {
    /*text-align:center;*/
-   float:top;
    text-align:center;
    font-family:'Quando', serif;
    font-size:15px;
-   font-style:bold;
-   background:light-gray;
 }
 table
 {
@@ -77,7 +74,6 @@ so the only thing visible to the browser is the easynote div.*/
 #size-table
 {
    padding:0px;
-   margins:0px;
 }
 #size-tiny img
 {
