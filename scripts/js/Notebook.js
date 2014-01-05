@@ -48,7 +48,8 @@
     };
 
     Notebook.prototype.loadPage = function() {
-      var ctx, dataURL, img;
+      var ctx, dataURL, img,
+        _this = this;
       this.CANVAS.destroyChildren();
       this.CANVAS.clear();
       if (this.pages[this.currentPage] === null) {
@@ -58,7 +59,7 @@
       dataURL = this.pages[this.currentPage];
       img = new Image;
       img.onload = function() {
-        return ctx.drawImage(img, 0, 0);
+        return ctx.drawImage(img, 0, 0, _this.CANVAS.getCanvas().width, _this.CANVAS.getCanvas().height);
       };
       return img.src = dataURL;
     };
@@ -73,18 +74,14 @@
     };
 
     Notebook.prototype.restoreState = function() {
-      var cnvImg, ctx;
+      var ctx;
       if (typeof window.localStorage !== 'object' || (localStorage[this.NOTEBOOK_KEY] == null) || (localStorage[this.CURRENT_PAGE_KEY] == null)) {
         return false;
       }
       this.pages = JSON.parse(localStorage[this.NOTEBOOK_KEY]);
       this.currentPage = parseInt(localStorage[this.CURRENT_PAGE_KEY]);
       ctx = this.CANVAS.getContext();
-      cnvImg = new Image;
-      cnvImg.onload = function() {
-        return ctx.drawImage(cnvImg, 0, 0);
-      };
-      cnvImg.src = this.pages[this.currentPage];
+      this.loadPage();
       return true;
     };
 

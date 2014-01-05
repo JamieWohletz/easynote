@@ -90,15 +90,15 @@ class window.EasyNote
       ctx = newCanvas.getContext('2d')
       
       bgImg = new Image
-      bgImg.onload = ->
-         ctx.drawImage(bgImg,0,0)
+      bgImg.onload = =>
+         ctx.drawImage(bgImg,0,0,@WIDTH,@HEIGHT)
       bgImg.src = bgURL
       
       cnvImg = new Image
       #When the second image is finished loading, add it to the new canvas, get a dataURL representing that canvas's image, then write
       #the image to the popup window so the user can save it.
       cnvImg.onload = =>
-         ctx.drawImage(cnvImg,0,0)
+         ctx.drawImage(cnvImg,0,0,@WIDTH,@HEIGHT)
          w.document.write '<img src="' + newCanvas.toDataURL("image/png") + '" width="'+@WIDTH+'" height="'+@HEIGHT+'"/>'
       cnvImg.src = cnvURL
       

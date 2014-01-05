@@ -49,8 +49,8 @@ class window.Notebook
       ctx = @CANVAS.getContext()
       dataURL = @pages[@currentPage]
       img = new Image
-      img.onload = ->
-         ctx.drawImage img, 0, 0
+      img.onload = =>
+         ctx.drawImage img, 0, 0, @CANVAS.getCanvas().width, @CANVAS.getCanvas().height
       img.src = dataURL
       
    #Saves each notebook page (as well as the current page pointer) in local storage for later retrieval.
@@ -69,9 +69,6 @@ class window.Notebook
       @currentPage = parseInt(localStorage[@CURRENT_PAGE_KEY])
       ctx = @CANVAS.getContext()
       #load the current page
-      cnvImg = new Image
-      cnvImg.onload = ->
-         ctx.drawImage(cnvImg,0,0)
-      cnvImg.src = @pages[@currentPage]
+      @loadPage()
       true
       

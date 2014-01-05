@@ -103,12 +103,12 @@
       ctx = newCanvas.getContext('2d');
       bgImg = new Image;
       bgImg.onload = function() {
-        return ctx.drawImage(bgImg, 0, 0);
+        return ctx.drawImage(bgImg, 0, 0, _this.WIDTH, _this.HEIGHT);
       };
       bgImg.src = bgURL;
       cnvImg = new Image;
       cnvImg.onload = function() {
-        ctx.drawImage(cnvImg, 0, 0);
+        ctx.drawImage(cnvImg, 0, 0, _this.WIDTH, _this.HEIGHT);
         return w.document.write('<img src="' + newCanvas.toDataURL("image/png") + '" width="' + _this.WIDTH + '" height="' + _this.HEIGHT + '"/>');
       };
       cnvImg.src = cnvURL;
