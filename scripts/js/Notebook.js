@@ -48,20 +48,25 @@
     };
 
     Notebook.prototype.loadPage = function() {
-      var ctx, dataURL, img,
+      var ctx, dataURL, img, old,
         _this = this;
       this.CANVAS.destroyChildren();
       this.CANVAS.clear();
       if (this.pages[this.currentPage] === null) {
         return;
       }
-      ctx = this.CANVAS.getContext();
+      ctx = this.CANVAS.context;
+      old = {};
+      old.operation = ctx.globalCompositeOperation;
+      old.strokeStyle = ctx.strokeStyle;
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = 'black';
       dataURL = this.pages[this.currentPage];
-      console.log('our data url is ', dataURL);
       img = new Image;
       img.onload = function() {
-        console.log('attempting to load ', img);
-        return ctx.drawImage(img, 0, 0, _this.CANVAS.getCanvas().width, _this.CANVAS.getCanvas().height);
+        ctx.drawImage(img, 0, 0, _this.CANVAS.getCanvas().width, _this.CANVAS.getCanvas().height);
+        ctx.globalCompositeOperation = old.operation;
+        return ctx.strokeStyle = old.strokeStyle;
       };
       return img.src = dataURL;
     };
@@ -76,13 +81,11 @@
     };
 
     Notebook.prototype.restoreState = function() {
-      var ctx;
       if (typeof window.localStorage !== 'object' || (localStorage[this.NOTEBOOK_KEY] == null) || (localStorage[this.CURRENT_PAGE_KEY] == null)) {
         return false;
       }
       this.pages = JSON.parse(localStorage[this.NOTEBOOK_KEY]);
       this.currentPage = parseInt(localStorage[this.CURRENT_PAGE_KEY]);
-      ctx = this.CANVAS.getContext();
       this.loadPage();
       return true;
     };

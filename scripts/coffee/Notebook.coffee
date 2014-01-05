@@ -46,11 +46,22 @@ class window.Notebook
       @CANVAS.clear()
       return if @pages[@currentPage] is null
       
-      ctx = @CANVAS.getContext()
+      ctx = @CANVAS.context
+      #We have to make sure our globalCompositeOperation is set to source-over or the image
+      #we're going to draw won't show up
+      old = {}
+      old.operation = ctx.globalCompositeOperation
+      old.strokeStyle = ctx.strokeStyle
+      ctx.globalCompositeOperation = 'source-over'
+      ctx.strokeStyle = 'black'
+      
       dataURL = @pages[@currentPage]
       img = new Image
       img.onload = =>
          ctx.drawImage img, 0, 0, @CANVAS.getCanvas().width, @CANVAS.getCanvas().height
+         #restore the old settings to the context
+         ctx.globalCompositeOperation = old.operation
+         ctx.strokeStyle = old.strokeStyle
       img.src = dataURL
       
    #Saves each notebook page (as well as the current page pointer) in local storage for later retrieval.
@@ -67,7 +78,6 @@ class window.Notebook
       
       @pages = JSON.parse localStorage[@NOTEBOOK_KEY]
       @currentPage = parseInt(localStorage[@CURRENT_PAGE_KEY])
-      ctx = @CANVAS.getContext()
       #load the current page
       @loadPage()
       true
