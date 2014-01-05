@@ -56,6 +56,8 @@ class window.Notebook
    #Saves each notebook page (as well as the current page pointer) in local storage for later retrieval.
    saveState: ->
       return if typeof window.localStorage isnt 'object'
+      #make sure the current page is saved
+      @savePage()
       localStorage[@CURRENT_PAGE_KEY] = @currentPage 
       localStorage[@NOTEBOOK_KEY] = JSON.stringify(@pages)
       

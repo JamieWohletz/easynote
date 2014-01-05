@@ -67,6 +67,7 @@
       if (typeof window.localStorage !== 'object') {
         return;
       }
+      this.savePage();
       localStorage[this.CURRENT_PAGE_KEY] = this.currentPage;
       return localStorage[this.NOTEBOOK_KEY] = JSON.stringify(this.pages);
     };
