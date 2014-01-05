@@ -109,8 +109,7 @@
       w = this.showCanvas();
       w.document.close();
       w.focus();
-      w.print();
-      return w.close();
+      return w.print();
     };
 
     EasyNote.prototype.printAll = function() {

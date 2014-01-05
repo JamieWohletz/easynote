@@ -102,11 +102,10 @@ class window.EasyNote
       w.document.close()
       w.focus()
       w.print()
-      w.close()
       
    #Prints both the background and the canvas.
    printAll: ->
-      #This relies on special print-only CSS. See main.css.
+      #This relies on special media-query CSS. See main.css.
       window.print();
          
    constructor: ->
