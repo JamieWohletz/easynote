@@ -22,6 +22,16 @@ class window.EasyNote
    #The layer the user draws on
    canvas: null
    
+   constructor: ->
+      @WIDTH = if window.innerWidth >= 900 then (window.innerWidth / 100) * 50 else window.innerWidth - $('#control-panel').width()
+      @HEIGHT = Math.max Math.floor(@WIDTH * 1.29411764706), $('#control-panel').height()
+      @setupStage()
+      @setupBackground()
+      @setupCanvas()
+      #reload the last state if available
+      if localStorage && localStorage['canvas']
+         @restoreState()
+   
    #Sets the pen to eraser mode
    activateEraser: ->
       @canvas.startErasing()
@@ -107,14 +117,23 @@ class window.EasyNote
    printAll: ->
       #This relies on special media-query CSS. See main.css.
       window.print();
-         
-   constructor: ->
-      @WIDTH = if window.innerWidth >= 900 then (window.innerWidth / 100) * 50 else window.innerWidth - $('#control-panel').width()
-      @HEIGHT = Math.max Math.floor(@WIDTH * 1.29411764706), $('#control-panel').height()
-      @setupStage()
-      @setupBackground()
-      @setupCanvas()
    
+   #Saves both the foreground and background images in local storage.
+   saveState: ->
+      return if !localStorage
+      localStorage['canvas'] = @canvas.getCanvas()._canvas.toDataURL("image/png")
+      
+   #Restores the previously saved state (see saveState())
+   restoreState: ->
+      return if !localStorage
+      ctx = @canvas.getCanvas()._canvas.getContext '2d'
+      #load the image
+      cnvImg = new Image
+      cnvImg.onload = ->
+         ctx.drawImage(cnvImg,0,0)
+      cnvImg.src = localStorage['canvas']
+      
+      
    setupStage: ->
       @stage = new Kinetic.Stage
          container: 'easynote'

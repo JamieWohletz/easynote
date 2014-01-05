@@ -58,6 +58,9 @@ $(document).ready ->
    $('#save-all').click ->
       #showSaveHelp()
       easyNote.showAll()
+   window.onbeforeunload = ->
+      easyNote.saveState()
+      return undefined
       
 showSaveHelp = ->
    alert "Right click the image that appears and click \"Save image as...\" to save your picture."

@@ -76,9 +76,13 @@
     $('#save-canvas').click(function() {
       return easyNote.showCanvas();
     });
-    return $('#save-all').click(function() {
+    $('#save-all').click(function() {
       return easyNote.showAll();
     });
+    return window.onbeforeunload = function() {
+      easyNote.saveState();
+      return void 0;
+    };
   });
 
   showSaveHelp = function() {

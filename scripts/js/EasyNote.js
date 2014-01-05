@@ -27,6 +27,17 @@
 
     EasyNote.prototype.canvas = null;
 
+    function EasyNote() {
+      this.WIDTH = window.innerWidth >= 900 ? (window.innerWidth / 100) * 50 : window.innerWidth - $('#control-panel').width();
+      this.HEIGHT = Math.max(Math.floor(this.WIDTH * 1.29411764706), $('#control-panel').height());
+      this.setupStage();
+      this.setupBackground();
+      this.setupCanvas();
+      if (localStorage && localStorage['canvas']) {
+        this.restoreState();
+      }
+    }
+
     EasyNote.prototype.activateEraser = function() {
       return this.canvas.startErasing();
     };
@@ -116,13 +127,25 @@
       return window.print();
     };
 
-    function EasyNote() {
-      this.WIDTH = window.innerWidth >= 900 ? (window.innerWidth / 100) * 50 : window.innerWidth - $('#control-panel').width();
-      this.HEIGHT = Math.max(Math.floor(this.WIDTH * 1.29411764706), $('#control-panel').height());
-      this.setupStage();
-      this.setupBackground();
-      this.setupCanvas();
-    }
+    EasyNote.prototype.saveState = function() {
+      if (!localStorage) {
+        return;
+      }
+      return localStorage['canvas'] = this.canvas.getCanvas()._canvas.toDataURL("image/png");
+    };
+
+    EasyNote.prototype.restoreState = function() {
+      var cnvImg, ctx;
+      if (!localStorage) {
+        return;
+      }
+      ctx = this.canvas.getCanvas()._canvas.getContext('2d');
+      cnvImg = new Image;
+      cnvImg.onload = function() {
+        return ctx.drawImage(cnvImg, 0, 0);
+      };
+      return cnvImg.src = localStorage['canvas'];
+    };
 
     EasyNote.prototype.setupStage = function() {
       return this.stage = new Kinetic.Stage({
