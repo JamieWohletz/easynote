@@ -25,7 +25,9 @@ class window.EasyNote
    canvas: null
    
    constructor: ->
-      @WIDTH = if window.innerWidth >= 900 then (window.innerWidth / 100) * 50 else window.innerWidth - $('#control-panel').width()
+   
+      w = $(window).width()
+      @WIDTH = if w >= 950 then 950 else w - $('#control-panel').width()
       @HEIGHT = Math.max Math.floor(@WIDTH * 1.29411764706), $('#control-panel').height()
       @setupStage()
       @setupBackground()

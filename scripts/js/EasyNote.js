@@ -30,7 +30,9 @@
     EasyNote.prototype.canvas = null;
 
     function EasyNote() {
-      this.WIDTH = window.innerWidth >= 900 ? (window.innerWidth / 100) * 50 : window.innerWidth - $('#control-panel').width();
+      var w;
+      w = $(window).width();
+      this.WIDTH = w >= 950 ? 950 : w - $('#control-panel').width();
       this.HEIGHT = Math.max(Math.floor(this.WIDTH * 1.29411764706), $('#control-panel').height());
       this.setupStage();
       this.setupBackground();
