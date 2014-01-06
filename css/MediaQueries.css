@@ -1,0 +1,14 @@
+@media only screen and (max-width:320px)
+{ /* smartphones, iPhone, portrait 480x320 phones */ 
+   #nav-buttons, #print-canvas, #print-all
+     {
+      display:none;
+   }
+}
+@media only screen and (max-width:481px), only screen and (max-width:641px)
+{ /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+   #print-canvas, #print-all
+     {
+      display:none;
+   }
+}
