@@ -1,0 +1,10 @@
+controls:
+eraser
+pen
+size
+color-picker
+background
+   grid
+   lined
+   image
+save
